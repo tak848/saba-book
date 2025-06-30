@@ -19,8 +19,6 @@ jobs:
     
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
-      with:
-        targets: wasm32-unknown-unknown
     
     - name: Cache cargo registry
       uses: actions/cache@v4
@@ -57,7 +55,6 @@ jobs:
       uses: dtolnay/rust-toolchain@stable
       with:
         components: clippy
-        targets: wasm32-unknown-unknown
     
     - name: Cache cargo registry
       uses: actions/cache@v4
@@ -98,8 +95,6 @@ jobs:
     
     - name: Install Rust
       uses: dtolnay/rust-toolchain@stable
-      with:
-        targets: wasm32-unknown-unknown
     
     - name: Cache cargo registry
       uses: actions/cache@v4
@@ -113,7 +108,10 @@ jobs:
         path: ~/.cargo/git
         key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
     
+    - name: Add wasm32 target
+      run: rustup target add wasm32-unknown-unknown
+    
     - name: Build saba_core for wasm32
       run: |
         cd saba_core
-        cargo build --target wasm32-unknown-unknown --verbose
+        cargo build --target wasm32-unknown-unknown -Z build-std=core,alloc --verbose
