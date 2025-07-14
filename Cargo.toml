@@ -14,8 +14,6 @@ name = "saba"
 path = "src/main.rs"
 required-features = ["wasabi"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 saba_core = { path = "./saba_core" }
 net_wasabi = { path = "./net/wasabi", optional = true }
